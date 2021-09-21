@@ -1,7 +1,7 @@
 avail_zone = "eu-west-1b"
 env_prefix = "dev"
 instance_type = "a1"
-my_ip =  "77.41.172.122"
+my_ip =  "77.41.172.122/32"
 private_key_location = "."
 public_key_location = "."
 subnet_cidr_block = "10.0.50.0/24"
