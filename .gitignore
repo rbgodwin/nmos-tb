@@ -6,5 +6,5 @@
 *.tfstate.*
 
 # Terraform variable files may include senstive data
-*.tfvars
+#*.tfvars
 
