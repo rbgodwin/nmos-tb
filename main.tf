@@ -11,6 +11,7 @@ variable instance_type {}
 variable public_key_location {}
 variable private_key_location {}
 
+
 resource "aws_vpc" "myapp-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
@@ -77,3 +78,25 @@ resource "aws_security_group" "myapp-sg" {
         Name = "${var.env_prefix}-sg"
     }
 }
+
+data "aws_ami" "latest-amazon-linux-image" {
+    most_recent = true
+    owners = ["amazon"]
+    filter {
+        name = "name"
+        values = ["amzn2-ami-hvm-*-gp2"]
+    }
+    filter {
+        name = "virtualization-type"
+        values = ["hvm"]
+    }
+}
+
+output "aws_ami_id" {
+    value = data.aws_ami.latest-amazon-linux-image.id
+}
+
+resource "aws_instance" "myapp-server" {
+     ami = data.aws_ami.latest-amazon-linux-image.id
+     instance_type = var.instance_type
+ }
