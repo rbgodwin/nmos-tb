@@ -1,6 +1,6 @@
 avail_zone = "eu-west-1b"
 env_prefix = "dev"
-my_ip =  "77.41.172.122/32"
+my_ip =  "89.113.127.142/32"
 private_key_location = "/home/rbgodwin/.ssh/id_rsa"
 public_key_location = "/home/rbgodwin/.ssh/id_rsa.pub"
 subnet_cidr_block = "10.0.50.0/24"
