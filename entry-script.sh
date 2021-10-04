@@ -3,10 +3,10 @@ sudo yum update -y
 sudo yum install -y docker
 sudo systemctl start docker
 sudo usermod -aG docker ec2-user
-sudo docker run -d -p 8080:80 nginx 
+docker run -d -p 8080:80 nginx 
 
 # Crank up a BIND9 DNS Server for our DNS-SD Needs
-sudo docker run -d \
+docker run -d \
         --name=bind9 \
         --restart=always \
         --publish 53:53/udp \
@@ -18,5 +18,5 @@ sudo docker run -d \
         --volume /var/log \
         internetsystemsconsortium/bind9:9.16
 docker pull rhastie/nmos-cpp:latest
-sudo docker run -d --net=host --privileged --rm rhastie/nmos-cpp:latest 
-sudo docker run --env RUN_NODE=TRUE -d --net=host --privileged --rm rhastie/nmos-cpp:latest
+docker run -d --net=host --privileged --rm rhastie/nmos-cpp:latest 
+docker run --env RUN_NODE=TRUE -d --net=host --privileged --rm rhastie/nmos-cpp:latest

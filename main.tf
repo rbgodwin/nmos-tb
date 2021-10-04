@@ -108,7 +108,7 @@ output "ec2_public_ip" {
 }
 
 resource "aws_key_pair" "ssh-key"{
-    key_name = "server-key"
+    key_name = "server-key-work"
     public_key = file(var.public_key_location)
 }
 
@@ -121,9 +121,25 @@ resource "aws_instance" "myapp-server" {
      availability_zone = var.avail_zone
      
      associate_public_ip_address = true
-     key_name = "server-key"
+     key_name = "server-key-work"
 
-#    user_data = file("entry-script.sh")
+    user_data = file("entry-script.sh")
+
+    connection {
+        type ="ssh"
+        host = self.public_ip
+        user = "ec2-user"
+        private_key = file(var.private_key_location)
+    }
+
+    provisioner "file" {
+        source = "entry-script.sh"
+        destination = "/home/ec2-user/entry-script.sh"
+    }
+
+#    provisioner "remote-exec" {
+#       script = file("entry-script.sh")
+#    }
 
      tags = {
         Name = "${var.env_prefix}-server"
