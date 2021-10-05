@@ -27,6 +27,7 @@ module "myapp-server" {
     env_prefix = var.env_prefix
     image_name = var.image_name
     public_key_location = var.public_key_location
+    private_key_location = var.private_key_location
     instance_type = var.instance_type
     subnet_id = module.myapp-subnet.subnet.id
     avail_zone = var.avail_zone
