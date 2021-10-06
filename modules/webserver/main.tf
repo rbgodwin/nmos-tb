@@ -84,12 +84,12 @@ resource "aws_instance" "myapp-server" {
         destination = "/home/ec2-user/entry-script.sh"
     }
 
-    provisioner "remote-exec" {
-        inline = [
-            "chmod +x /home/ec2-user/entry-script.sh",
-            "/home/ec2-user/entry-script.sh"
-        ]
-    }
+#    provisioner "remote-exec" {
+#        inline = [
+#            "chmod +x /home/ec2-user/entry-script.sh",
+#            "/home/ec2-user/entry-script.sh"
+#        ]
+#    }
 
      tags = {
         Name = "${var.env_prefix}-server"
