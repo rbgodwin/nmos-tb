@@ -31,7 +31,7 @@ resource "aws_security_group" "rds-server-sg" {
     }
 
     tags = {
-        Name = "${var.env_prefix}-sg"
+        Name = "${var.env_prefix}-rds-server-sg"
     }
 }
 
