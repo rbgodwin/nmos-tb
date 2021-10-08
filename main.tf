@@ -20,8 +20,6 @@ resource "aws_vpc" "nmos-tb-vpc" {
         Name = "${var.env_prefix}-nmos-tb-vpc"
     }
 
-    depends_on = [aws_vpc_dhcp_options.dns_resolver]
-
 }
 
 # Set up the VPC Network
@@ -71,7 +69,7 @@ module "rds-server" {
 resource "aws_vpc_dhcp_options" "dns_resolver" {
 
     domain_name_servers = [
-        "${module.dns-server.instance.private_ip}",
+#        "${module.dns-server.instance.private_ip}",
         "8.8.8.8"
  
     ]
@@ -87,7 +85,5 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 
     vpc_id = aws_vpc.nmos-tb-vpc.id
     dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
-
-    depends_on = [aws_vpc_dhcp_options.dns_resolver, aws_vpc.nmos-tb-vpc]
 
 }
