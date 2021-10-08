@@ -31,7 +31,7 @@ module "nmos-tb-subnet" {
     default_route_table_id = aws_vpc.nmos-tb-vpc.default_route_table_id
 }
 
-# Set up the Application Server
+# Set up the DNS Server
 module "dns-server" {
     source = "./modules/dns-server"
     vpc_id = aws_vpc.nmos-tb-vpc.id
@@ -44,6 +44,23 @@ module "dns-server" {
     subnet_id = module.nmos-tb-subnet.subnet.id
     avail_zone = var.avail_zone
 }
+
+
+# Set up the RDS Server
+module "rds-server" {
+    source = "./modules/rds-server"
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    my_ip = var.my_ip
+    env_prefix = var.env_prefix
+    image_name = var.image_name
+    public_key_location = var.public_key_location
+    private_key_location = var.private_key_location
+    instance_type = var.instance_type
+    subnet_id = module.nmos-tb-subnet.subnet.id
+    avail_zone = var.avail_zone
+}
+
+
 
 ### Setup DNS to use our BIND 9 DNS (Note this is AWS Specific)
 
