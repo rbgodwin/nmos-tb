@@ -79,7 +79,7 @@ resource "aws_vpc_dhcp_options" "dns_resolver" {
     }
 }
 
-# Assosiate it with our VPC
+# Associate it with our VPC
 
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 
