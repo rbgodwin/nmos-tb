@@ -69,7 +69,7 @@ module "rds-server" {
 resource "aws_vpc_dhcp_options" "dns_resolver" {
 
     domain_name_servers = [
-#        "${module.dns-server.instance.private_ip}",
+        "${module.dns-server.instance.private_ip}",
         "8.8.8.8"
  
     ]
