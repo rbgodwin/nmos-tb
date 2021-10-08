@@ -20,6 +20,14 @@ resource "aws_security_group" "dns-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+# Lookup from same host as DNS Server
+    ingress {
+        from_port = 953
+        to_port = 953
+        protocol = "tcp"
+        cidr_blocks = ["127.0.0.1/32"]
+    }
+
     ingress {
         from_port = 53
         to_port = 53
