@@ -1,7 +1,9 @@
 
 
 #  Security Group 
-resource "aws_default_security_group" "default-sg" {
+resource "aws_security_group" "dns-server-sg" {
+    name = "DNS Security Group"
+    description = "Allows only ssh assess on port 22 and DNS port 53."
     vpc_id = var.vpc_id
 
     ingress {
@@ -12,19 +14,19 @@ resource "aws_default_security_group" "default-sg" {
     }
 
     ingress {
-        from_port = 8080
-        to_port = 8080
+        from_port = 53
+        to_port = 53
+        protocol = "udp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        from_port = 53
+        to_port = 53
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-# NMOS RDS
-     ingress {
-        from_port = 8010
-        to_port = 8010
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
 
     egress {
         from_port = 0
@@ -35,7 +37,7 @@ resource "aws_default_security_group" "default-sg" {
     }
 
     tags = {
-        Name = "${var.env_prefix}-sg"
+        Name = "${var.env_prefix}-dns-server-sg"
     }
 }
 
@@ -64,7 +66,7 @@ resource "aws_instance" "dns-server" {
 
      subnet_id = var.subnet_id
 
-     vpc_security_group_ids = [aws_default_security_group.default-sg.id]
+     vpc_security_group_ids = [aws_security_group.dns-server-sg.id]
      availability_zone = var.avail_zone
      
      associate_public_ip_address = true

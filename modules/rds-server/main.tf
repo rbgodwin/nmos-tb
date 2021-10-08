@@ -1,7 +1,9 @@
 
 
 #  Security Group 
-resource "aws_default_security_group" "default-sg" {
+resource "aws_security_group" "rds-server-sg" {
+    name = "RDS Security Group"
+    description = "Allows only ssh assess on port 22 and RDS port 8010."
     vpc_id = var.vpc_id
 
 # SSH Access
@@ -58,7 +60,7 @@ resource "aws_instance" "rds-server" {
 
      subnet_id = var.subnet_id
 
-     vpc_security_group_ids = [aws_default_security_group.default-sg.id]
+     vpc_security_group_ids = [aws_security_group.rds-server-sg.id]
      availability_zone = var.avail_zone
      
      associate_public_ip_address = true
