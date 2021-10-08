@@ -45,17 +45,17 @@ module "myapp-server" {
     avail_zone = var.avail_zone
 }
 
-
 ### Setup DNS to use our BIND 9 DNS (Note this is AWS Specific)
 
 # Create the resolver
 resource "aws_vpc_dhcp_options" "dns_resolver" {
 
     domain_name_servers = [
-#        module.myapp-server.private_ip
+        "$module.myapp-server.instance.private_ip",
          "8.8.8.8"
  
     ]
+    domain_name = "nmos.domain"
     tags = {
         Name = "DNS_Resolver"
     }
