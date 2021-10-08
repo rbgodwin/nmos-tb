@@ -19,6 +19,7 @@ resource "aws_vpc" "nmos-tb-vpc" {
     tags = {
         Name = "${var.env_prefix}-nmos-tb-vpc"
     }
+
 }
 
 # Set up the VPC Network
@@ -84,5 +85,7 @@ resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 
     vpc_id = aws_vpc.nmos-tb-vpc.id
     dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
+
+    depends_on = [aws_vpc_dhcp_options.dns_resolver, aws_vpc.nmos-tb-vpc]
 
 }
