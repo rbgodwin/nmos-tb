@@ -20,6 +20,8 @@ resource "aws_vpc" "nmos-tb-vpc" {
         Name = "${var.env_prefix}-nmos-tb-vpc"
     }
 
+    depends_on = [aws_vpc_dhcp_options.dns_resolver]
+
 }
 
 # Set up the VPC Network
