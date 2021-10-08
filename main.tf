@@ -17,7 +17,7 @@ provider "aws" {
 resource "aws_vpc" "nmos-tb-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
-        Name = "${var.env_prefix}-vpc"
+        Name = "${var.env_prefix}-nmos-tb-vpc"
     }
 }
 
