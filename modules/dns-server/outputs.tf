@@ -1,3 +1,3 @@
 output "instance" {
-    value = aws_instance.myapp-server
+    value = aws_instance.dns-server
 }

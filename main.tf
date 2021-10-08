@@ -14,7 +14,7 @@ provider "aws" {
 
 
 
-resource "aws_vpc" "myapp-vpc" {
+resource "aws_vpc" "nmos-tb-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
         Name = "${var.env_prefix}-vpc"
@@ -22,26 +22,26 @@ resource "aws_vpc" "myapp-vpc" {
 }
 
 # Set up the VPC Network
-module "myapp-subnet" {
+module "nmos-tb-subnet" {
     source = "./modules/subnet"
     subnet_cidr_block = var.subnet_cidr_block
     avail_zone = var.avail_zone 
     env_prefix = var.env_prefix
-    vpc_id = aws_vpc.myapp-vpc.id
-    default_route_table_id = aws_vpc.myapp-vpc.default_route_table_id
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    default_route_table_id = aws_vpc.nmos-tb-vpc.default_route_table_id
 }
 
 # Set up the Application Server
-module "myapp-server" {
-    source = "./modules/webserver"
-    vpc_id = aws_vpc.myapp-vpc.id
+module "dns-server" {
+    source = "./modules/dns-server"
+    vpc_id = aws_vpc.nmos-tb-vpc.id
     my_ip = var.my_ip
     env_prefix = var.env_prefix
     image_name = var.image_name
     public_key_location = var.public_key_location
     private_key_location = var.private_key_location
     instance_type = var.instance_type
-    subnet_id = module.myapp-subnet.subnet.id
+    subnet_id = module.nmos-tb-subnet.subnet.id
     avail_zone = var.avail_zone
 }
 
@@ -51,13 +51,13 @@ module "myapp-server" {
 resource "aws_vpc_dhcp_options" "dns_resolver" {
 
     domain_name_servers = [
-        "$module.myapp-server.instance.private_ip",
-         "8.8.8.8"
+        "${module.dns-server.instance.private_ip}",
+        "8.8.8.8"
  
     ]
     domain_name = "nmos.domain"
     tags = {
-        Name = "DNS_Resolver"
+        Name = "NMOS Testbed DNS_Resolver"
     }
 }
 
@@ -65,7 +65,7 @@ resource "aws_vpc_dhcp_options" "dns_resolver" {
 
 resource "aws_vpc_dhcp_options_association" "dns_resolver" {
 
-    vpc_id = aws_vpc.myapp-vpc.id
+    vpc_id = aws_vpc.nmos-tb-vpc.id
     dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
 
 }

@@ -54,11 +54,11 @@ data "aws_ami" "latest-amazon-linux-image" {
 
 
 resource "aws_key_pair" "ssh-key"{
-    key_name = "server-key-work"
+    key_name = "server-key-dns-server"
     public_key = file(var.public_key_location)
 }
 
-resource "aws_instance" "myapp-server" {
+resource "aws_instance" "dns-server" {
      ami = data.aws_ami.latest-amazon-linux-image.id
      instance_type = var.instance_type
 
@@ -81,19 +81,19 @@ resource "aws_instance" "myapp-server" {
     }
 
     provisioner "file" {
-        source = "entry-script.sh"
-        destination = "/home/ec2-user/entry-script.sh"
+        source = "entry-script-dns.sh"
+        destination = "/home/ec2-user/entry-script-dns.sh"
     }
 
     provisioner "remote-exec" {
         inline = [
-            "chmod +x /home/ec2-user/entry-script.sh",
-            "/home/ec2-user/entry-script.sh"
+            "chmod +x /home/ec2-user/entry-script-dns.sh",
+            "/home/ec2-user/entry-script-dns.sh"
         ]
     }
 
      tags = {
-        Name = "${var.env_prefix}-server"
+        Name = "${var.env_prefix}-dns-server"
     }     
 
  }
