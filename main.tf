@@ -62,7 +62,7 @@ module "rds-server" {
 
 
 
-### Setup DNS to use our BIND 9 DNS (Note this is AWS Specific)
+### Setup DNS to use our BIND 9 DNS
 
 # Create the resolver
 resource "aws_vpc_dhcp_options" "dns_resolver" {

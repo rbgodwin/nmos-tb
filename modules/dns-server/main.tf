@@ -2,9 +2,9 @@
 
 #  Security Group 
 resource "aws_security_group" "dns-server-sg" {
+    vpc_id = var.vpc_id
     name = "DNS Security Group"
     description = "Allows only ssh assess on port 22 and DNS port 53."
-    vpc_id = var.vpc_id
 
     ingress {
         from_port = 22
