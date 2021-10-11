@@ -74,14 +74,13 @@ resource "aws_instance" "dns-server" {
 
      subnet_id = var.subnet_id
 
+    # Set Private IP
+    private_ip = var.dns_address
      vpc_security_group_ids = [aws_security_group.dns-server-sg.id]
      availability_zone = var.avail_zone
      
      associate_public_ip_address = true
      key_name =  aws_key_pair.ssh-key.key_name
-
-
-#    user_data = file("entry-script.sh")
 
     connection {
         type ="ssh"
@@ -93,6 +92,16 @@ resource "aws_instance" "dns-server" {
     provisioner "file" {
         source = "entry-script-dns.sh"
         destination = "/home/ec2-user/entry-script-dns.sh"
+    }
+
+    provisioner "file" {
+        source = "db.gplab.com"
+        destination = "/home/ec2-user/db.gplab.com"
+    }
+
+   provisioner "file" {
+        source = "named.conf"
+        destination = "/home/ec2-user/named.conf"
     }
 
     provisioner "remote-exec" {

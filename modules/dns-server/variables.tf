@@ -7,3 +7,4 @@ variable private_key_location {}
 variable instance_type {}
 variable subnet_id {}
 variable avail_zone {}
+variable dns_address {}

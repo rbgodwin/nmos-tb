@@ -44,6 +44,7 @@ module "dns-server" {
     instance_type = var.instance_type
     subnet_id = module.nmos-tb-subnet.subnet.id
     avail_zone = var.avail_zone
+    dns_address = var.dns_address
 }
 
 
@@ -69,11 +70,11 @@ module "rds-server" {
 resource "aws_vpc_dhcp_options" "dns_resolver" {
 
     domain_name_servers = [
-        "${module.dns-server.instance.private_ip}",
+        var.dns_address,
         "8.8.8.8"
  
     ]
-    domain_name = "nmos.domain"
+    domain_name = "gplab.com"
     tags = {
         Name = "NMOS Testbed DNS_Resolver"
     }
