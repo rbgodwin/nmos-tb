@@ -8,3 +8,4 @@ variable public_key_location {}
 variable private_key_location {}
 variable image_name {}
 variable dns_address {}
+variable rds_address {}

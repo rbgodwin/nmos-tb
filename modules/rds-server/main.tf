@@ -66,8 +66,8 @@ resource "aws_instance" "rds-server" {
      associate_public_ip_address = true
      key_name =  aws_key_pair.ssh-key.key_name
 
-
-#    user_data = file("entry-script.sh")
+    # Set Private IP
+    private_ip = var.rds_address
 
     connection {
         type ="ssh"

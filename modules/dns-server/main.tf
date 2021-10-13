@@ -76,6 +76,7 @@ resource "aws_instance" "dns-server" {
 
     # Set Private IP
     private_ip = var.dns_address
+    
      vpc_security_group_ids = [aws_security_group.dns-server-sg.id]
      availability_zone = var.avail_zone
      

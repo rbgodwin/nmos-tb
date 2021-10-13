@@ -60,6 +60,7 @@ module "rds-server" {
     instance_type = var.instance_type
     subnet_id = module.nmos-tb-subnet.subnet.id
     avail_zone = var.avail_zone
+    rds_address = var.rds_address
 }
 
 
