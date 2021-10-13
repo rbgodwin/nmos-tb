@@ -1,5 +1,5 @@
 $TTL 3600
-@       IN      SOA     dns1.gplab.com. admin.gplab.com. (
+@       IN      SOA     dns1.nmos-tb.com. admin.nmos-tb.com. (
            20210713     ; Serial
                3600     ; Refresh
                 600     ; Retry
@@ -8,7 +8,7 @@ $TTL 3600
 
 
 ; DNS server
-        IN      NS      dns.gplab.com.
+        IN      NS      dns.nmos-tb.com.
 
 ; These lines indicate to clients that this server supports DNS Service Discovery
 b._dns-sd._udp  IN      PTR     @
@@ -22,8 +22,8 @@ _nmos-register._tcp     PTR     reg-api-1._nmos-register._tcp
 _nmos-query._tcp        PTR     qry-api-1._nmos-query._tcp
 
 ; NMOS RDS services                          TTL     Class  SRV  Priority  Weight  Port  Target
-reg-api-1._nmos-register._tcp.gplab.com.     3600    IN     SRV  10        10      80    rds1.gplab.com.
-qry-api-1._nmos-query._tcp.gplab.com.        3600    IN     SRV  10        10      80    rds1.gplab.com.
+reg-api-1._nmos-register._tcp.gplab.com.     3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
+qry-api-1._nmos-query._tcp.gplab.com.        3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
 
 
 ; Additional metadata relevant to the IS-04 specification. See IS-04 specification section "Discovery: Registered Operation"
@@ -31,11 +31,11 @@ reg-api-1._nmos-register._tcp.gplab.com.        TXT     "api_ver=v1.0,v1.1,v1.2,
 qry-api-1._nmos-query._tcp.gplab.com.           TXT     "api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "pri=0" "api_auth=false"
 
 ; RDS                              TTL     Class  SRV  Priority  Weight  Port  Target
-_nmos-register._tcp.gplab.com.     3600    IN     SRV  10        20      80    rds1.gplab.com.
-_nmos-query._tcp.gplab.com.        3600    IN     SRV  10        20      80    rds1.gplab.com.
+_nmos-register._tcp.gplab.com.     3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
+_nmos-query._tcp.gplab.com.        3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
 
 
 ; Nameserver records    Class  Type     Target
-dns1.gplab.com.         IN     A        192.168.0.18
-rds1.gplab.com.         IN     A        192.168.0.50
+dns1.nmos-tb.com.         IN     A        10.0.50.59
+rds1.nmos-tb.com.         IN     A        10.0.50.77
 

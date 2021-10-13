@@ -11,7 +11,7 @@ sudo mkdir /var/lib/bind
 sudo mkdir /var/cache/bind
 
 #Copy over the configuration files for Bind 9
-sudo cp /home/ec2-user/db.gplab.com /etc/bind/zones
+sudo cp /home/ec2-user/db.nmos-tb.com /etc/bind/zones
 sudo cp /home/ec2-user/named.conf /etc/bind/named.conf
 
 # Start up the BIND9 DNS

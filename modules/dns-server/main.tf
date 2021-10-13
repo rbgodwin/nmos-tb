@@ -95,8 +95,8 @@ resource "aws_instance" "dns-server" {
     }
 
     provisioner "file" {
-        source = "db.gplab.com"
-        destination = "/home/ec2-user/db.gplab.com"
+        source = "db.nmos-tb.com"
+        destination = "/home/ec2-user/db.nmos-tb.com"
     }
 
    provisioner "file" {
