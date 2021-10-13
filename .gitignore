@@ -7,4 +7,5 @@
 
 # Terraform variable files may include senstive data
 #*.tfvars
+.vscode*
 

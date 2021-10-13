@@ -1,125 +1,91 @@
+terraform {
+    required_version = ">= 0.12"
+    backend "s3" {
+        bucket = "myapp-bucket-nt"
+        region = "eu-west-1"
+        key = "myapp/state.tfstate"
+    }
+}
+
+
 provider "aws" {
     region = "eu-west-1"
 }
 
-variable vpc_cidr_block {}
-variable subnet_cidr_block {}
-variable avail_zone {}
-variable env_prefix {}
-variable my_ip {}
-variable instance_type {}
-variable public_key_location {}
-variable private_key_location {}
 
 
-resource "aws_vpc" "myapp-vpc" {
+resource "aws_vpc" "nmos-tb-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
-        Name = "${var.env_prefix}-vpc"
+        Name = "${var.env_prefix}-nmos-tb-vpc"
     }
+
 }
 
-resource "aws_subnet" "myapp-subnet-1" {
-    vpc_id = aws_vpc.myapp-vpc.id
-    cidr_block = var.subnet_cidr_block
-    availability_zone = var.avail_zone
+# Set up the VPC Network
+module "nmos-tb-subnet" {
+    source = "./modules/subnet"
+    subnet_cidr_block = var.subnet_cidr_block
+    avail_zone = var.avail_zone 
+    env_prefix = var.env_prefix
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    default_route_table_id = aws_vpc.nmos-tb-vpc.default_route_table_id
+}
+
+# Set up the DNS Server
+module "dns-server" {
+    source = "./modules/dns-server"
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    my_ip = var.my_ip
+    env_prefix = var.env_prefix
+    image_name = var.image_name
+    public_key_location = var.public_key_location
+    private_key_location = var.private_key_location
+    instance_type = var.instance_type
+    subnet_id = module.nmos-tb-subnet.subnet.id
+    avail_zone = var.avail_zone
+    dns_address = var.dns_address
+}
+
+
+# Set up the RDS Server
+module "rds-server" {
+    source = "./modules/rds-server"
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    my_ip = var.my_ip
+    env_prefix = var.env_prefix
+    image_name = var.image_name
+    public_key_location = var.public_key_location
+    private_key_location = var.private_key_location
+    instance_type = var.instance_type
+    subnet_id = module.nmos-tb-subnet.subnet.id
+    avail_zone = var.avail_zone
+    rds_address = var.rds_address
+}
+
+
+
+### Setup DNS to use our BIND 9 DNS
+
+# Create the resolver
+resource "aws_vpc_dhcp_options" "dns_resolver" {
+
+    domain_name_servers = [
+        var.dns_address,
+        "8.8.8.8"
+ 
+    ]
+    domain_name = "gplab.com"
     tags = {
-        Name = "${var.env_prefix}-subnet-1"
+        Name = "NMOS Testbed DNS_Resolver"
     }
 }
 
-resource "aws_internet_gateway" "myapp-igw" {
-    vpc_id = aws_vpc.myapp-vpc.id
-    tags = {
-        Name = "${var.env_prefix}-igw"
-    }
+# Associate it with our VPC
+
+resource "aws_vpc_dhcp_options_association" "dns_resolver" {
+
+    vpc_id = aws_vpc.nmos-tb-vpc.id
+    dhcp_options_id = aws_vpc_dhcp_options.dns_resolver.id
+
 }
-
-resource "aws_default_route_table" "main-rtb" {
-    default_route_table_id = aws_vpc.myapp-vpc.default_route_table_id
-
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.myapp-igw.id
-    }
-    tags = {
-        Name = "${var.env_prefix}-main-rtb"
-    }
-}
-
-
-resource "aws_default_security_group" "default-sg" {
-    vpc_id = aws_vpc.myapp-vpc.id
-
-    ingress {
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = [var.my_ip]
-    }
-
-    ingress {
-        from_port = 8080
-        to_port = 8080
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-        prefix_list_ids = []
-    }
-
-    tags = {
-        Name = "${var.env_prefix}-sg"
-    }
-}
-
-data "aws_ami" "latest-amazon-linux-image" {
-    most_recent = true
-    owners = ["amazon"]
-    filter {
-        name = "name"
-        values = ["amzn2-ami-hvm-*-gp2"]
-    }
-    filter {
-        name = "virtualization-type"
-        values = ["hvm"]
-    }
-}
-
-output "aws_ami_id" {
-    value = data.aws_ami.latest-amazon-linux-image.id
-}
-
-output "ec2_public_ip" {
-    value = aws_instance.myapp-server.public_ip
-}
-
-resource "aws_key_pair" "ssh-key"{
-    key_name = "server-key"
-    public_key = file(var.public_key_location)
-}
-
-resource "aws_instance" "myapp-server" {
-     ami = data.aws_ami.latest-amazon-linux-image.id
-     instance_type = var.instance_type
-
-     subnet_id = aws_subnet.myapp-subnet-1.id
-     vpc_security_group_ids = [aws_default_security_group.default-sg.id]
-     availability_zone = var.avail_zone
-     
-     associate_public_ip_address = true
-     key_name = "server-key"
-
-    user_data = file("entry-script.sh")
-
-     tags = {
-        Name = "${var.env_prefix}-server"
-    }     
-
- }
-
