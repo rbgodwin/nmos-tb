@@ -22,17 +22,17 @@ _nmos-register._tcp     PTR     reg-api-1._nmos-register._tcp
 _nmos-query._tcp        PTR     qry-api-1._nmos-query._tcp
 
 ; NMOS RDS services                          TTL     Class  SRV  Priority  Weight  Port  Target
-reg-api-1._nmos-register._tcp.gplab.com.     3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
-qry-api-1._nmos-query._tcp.gplab.com.        3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
+reg-api-1._nmos-register._tcp.nmos-tb.com.     3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
+qry-api-1._nmos-query._tcp.nmos-tb.com.        3600    IN     SRV  10        10      80    rds1.nmos-tb.com.
 
 
 ; Additional metadata relevant to the IS-04 specification. See IS-04 specification section "Discovery: Registered Operation"
-reg-api-1._nmos-register._tcp.gplab.com.        TXT     "api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "pri=0" "api_auth=false"
-qry-api-1._nmos-query._tcp.gplab.com.           TXT     "api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "pri=0" "api_auth=false"
+reg-api-1._nmos-register._tcp.nmos-tb.com.        TXT     "api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "pri=0" "api_auth=false"
+qry-api-1._nmos-query._tcp.nmos-tb.com.           TXT     "api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "pri=0" "api_auth=false"
 
 ; RDS                              TTL     Class  SRV  Priority  Weight  Port  Target
-_nmos-register._tcp.gplab.com.     3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
-_nmos-query._tcp.gplab.com.        3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
+_nmos-register._tcp.nmos-tb.com.     3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
+_nmos-query._tcp.nmos-tb.com.        3600    IN     SRV  10        20      80    rds1.nmos-tb.com.
 
 
 ; Nameserver records    Class  Type     Target
