@@ -11,7 +11,9 @@ resource "aws_security_group" "rds-server-sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = [var.my_ip]
+#        cidr_blocks = [var.my_ip]
+         cidr_blocks = ["0.0.0.0/0"]
+
     }
 
 # NMOS RDS
