@@ -75,7 +75,7 @@ resource "aws_vpc_dhcp_options" "dns_resolver" {
         "8.8.8.8"
  
     ]
-    domain_name = "gplab.com"
+    domain_name = "nmos-tb.com"
     tags = {
         Name = "NMOS Testbed DNS_Resolver"
     }
