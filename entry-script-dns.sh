@@ -11,7 +11,7 @@ sudo mkdir /var/lib/bind
 sudo mkdir /var/cache/bind
 
 #Copy over the configuration files for Bind 9
-sudo cp /home/ec2-user/db.nmos-tb.com /etc/bind/zones
+sudo cp /home/ec2-user/db.workshop.nmos.tv /etc/bind/zones
 sudo cp /home/ec2-user/named.conf /etc/bind/named.conf
 
 # Start up the BIND9 DNS
@@ -21,8 +21,9 @@ sudo docker run -d \
         --publish 53:53/udp \
         --publish 53:53/tcp \
         --publish 127.0.0.1:953:953/tcp \
-        --volume /etc/bind \
-        --volume /var/cache/bind \
-        --volume /var/lib/bind \
-        --volume /var/log \
+        --volume /etc/bind:/etc/bind \
+        --volume /var/cache/bind:/var/cache/bind \
+        --volume /var/lib/bind:/var/lib/bind \
         internetsystemsconsortium/bind9:9.16
+
+ 

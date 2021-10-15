@@ -97,8 +97,8 @@ resource "aws_instance" "dns-server" {
     }
 
     provisioner "file" {
-        source = "db.nmos-tb.com"
-        destination = "/home/ec2-user/db.nmos-tb.com"
+        source = "db.workshop.nmos.tv"
+        destination = "/home/ec2-user/db.workshop.nmos.tv"
     }
 
    provisioner "file" {

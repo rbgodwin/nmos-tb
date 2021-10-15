@@ -1,0 +1,91 @@
+$ORIGIN .
+$TTL 86400      ; 1 day
+workshop.nmos.tv        IN SOA  localhost. root.localhost. (
+                                90         ; serial
+                                604800     ; refresh (1 week)
+                                86400      ; retry (1 day)
+                                2419200    ; expire (4 weeks)
+                                86400      ; minimum (1 day)
+                                )
+                        NS      localhost.
+$ORIGIN workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-auth              PTR     auth._nmos-auth
+                        PTR     commercial-auth._nmos-auth
+$ORIGIN _nmos-auth._tcp.workshop.nmos.tv.
+auth                    TXT     "api_ver=v1.0" "api_proto=https" "pri=100"
+                        SRV     100 0 443 bbc-5.workshop.nmos.tv.
+commercial-auth         TXT     "api_ver=v1.0" "api_proto=https" "pri=0"
+                        SRV     0 0 8002 bbc-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-certs             PTR     certs._nmos-certs
+$ORIGIN _nmos-certs._tcp.workshop.nmos.tv.
+certs                   TXT     "pri=0"
+                        TXT     "api_ver=v1.0" "api_proto=https" "pri=0"
+                        SRV     0 0 8443 bbc-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-mqtt              PTR     mqtt._nmos-mqtt
+_nmos-query             PTR     sony-auth._nmos-query
+                        PTR     bbc-5-query._nmos-query
+                        PTR     discovery-auth._nmos-query
+                        PTR     discovery-https._nmos-query
+$ORIGIN _nmos-query._tcp.workshop.nmos.tv.
+discovery-auth          TXT     "api_ver=v1.3" "api_proto=https" "pri=100" "api_auth=true"
+                        SRV     100 0 443 bbc-5.workshop.nmos.tv.
+discovery-https         TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=false"
+                        SRV     0 0 443 bbc-4.workshop.nmos.tv.
+sony-auth               TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=true"
+                        SRV     0 0 30011 sony-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-register          PTR     sony-auth._nmos-register
+                        PTR     discovery-auth._nmos-register
+                        PTR     discovery-https._nmos-register
+$ORIGIN _nmos-query._tcp.workshop.nmos.tv.
+discovery-auth          TXT     "api_ver=v1.3" "api_proto=https" "pri=100" "api_auth=true"
+                        SRV     100 0 443 bbc-5.workshop.nmos.tv.
+discovery-https         TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=false"
+                        SRV     0 0 443 bbc-4.workshop.nmos.tv.
+sony-auth               TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=true"
+                        SRV     0 0 30011 sony-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-register          PTR     sony-auth._nmos-register
+                        PTR     discovery-auth._nmos-register
+                        PTR     discovery-https._nmos-register
+$ORIGIN _nmos-register._tcp.workshop.nmos.tv.
+discovery-auth          TXT     "api_ver=v1.3" "api_proto=https" "pri=100" "api_auth=true"
+                        SRV     100 0 443 bbc-5.workshop.nmos.tv.
+discovery-https         TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=false"
+                        SRV     0 0 443 bbc-4.workshop.nmos.tv.
+sony-auth               TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=0" "api_auth=true"
+                        SRV     0 0 30013 sony-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-registration      PTR     bbc-5-reg._nmos-register
+                        PTR     sony-auth._nmos-registration
+                        PTR     discovery-https._nmos-registration
+$ORIGIN _nmos-registration._tcp.workshop.nmos.tv.
+discovery-https         TXT     "api_ver=v1.1,v1.2" "api_proto=https" "pri=0"
+                        SRV     0 0 433 bbc-4.workshop.nmos.tv.
+sony-auth               TXT     "api_ver=v1.1,v1.2,v1.3" "api_proto=https" "pri=100" "api_auth=true"
+                        SRV     100 0 30013 sony-1.workshop.nmos.tv.
+$ORIGIN _tcp.workshop.nmos.tv.
+_nmos-system            PTR     system-https._nmos-system
+$ORIGIN _nmos-system._tcp.workshop.nmos.tv.
+system-http             SRV     0 0 80 bbc-4.workshop.nmos.tv.
+$ORIGIN _dns-sd._udp.workshop.nmos.tv.
+_services               PTR     _nmos-auth._tcp.workshop.nmos.tv.
+                        PTR     _nmos-certs._tcp.workshop.nmos.tv.
+                        PTR     _nmos-query._tcp.workshop.nmos.tv.
+                        PTR     _nmos-system._tcp.workshop.nmos.tv.
+                        PTR     _nmos-register._tcp.workshop.nmos.tv.
+                        PTR     _nmos-registration._tcp.workshop.nmos.tv.
+b                       PTR     .
+lb                      PTR     .
+$ORIGIN workshop.nmos.tv.
+bbc-1                   A       10.1.0.36
+bbc-4                   A       10.1.0.27
+bbc-5                   A       10.1.0.28
+crl                     CNAME   bbc-4
+dns                     A       10.1.0.1
+ftp                     A       10.1.0.1
+ocsp                    CNAME   bbc-4
+sony-1                  A       10.1.0.14
