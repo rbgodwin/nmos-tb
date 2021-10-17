@@ -13,7 +13,6 @@ provider "aws" {
 }
 
 
-
 resource "aws_vpc" "nmos-tb-vpc" {
     cidr_block = var.vpc_cidr_block
     tags = {
@@ -75,7 +74,7 @@ resource "aws_vpc_dhcp_options" "dns_resolver" {
         "8.8.8.8"
  
     ]
-    domain_name = "workshop.nmos.tv"
+    domain_name = var.domain_name
     tags = {
         Name = "NMOS Testbed DNS_Resolver"
     }

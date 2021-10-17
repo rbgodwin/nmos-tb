@@ -92,18 +92,28 @@ resource "aws_instance" "dns-server" {
     }
 
     provisioner "file" {
-        source = "entry-script-dns.sh"
+        source = "${path.module}/entry-script-dns.sh"
         destination = "/home/ec2-user/entry-script-dns.sh"
     }
 
     provisioner "file" {
-        source = "db.workshop.nmos.tv"
-        destination = "/home/ec2-user/db.workshop.nmos.tv"
+        source = "${path.module}/conf/named.conf"
+        destination = "/home/ec2-user/named.conf"
     }
 
-   provisioner "file" {
-        source = "named.conf"
-        destination = "/home/ec2-user/named.conf"
+    provisioner "file" {
+        source = "${path.module}/conf/named.conf.local"
+        destination = "/home/ec2-user/named.conf.local"
+    }
+
+    provisioner "file" {
+        source = "${path.module}/conf/db.nmos-tb.org"
+        destination = "/home/ec2-user/db.nmos-tb.orgs"
+    }
+
+    provisioner "file" {
+        source = "${path.module}/conf/db.10"
+        destination = "/home/ec2-user/db.10"
     }
 
     provisioner "remote-exec" {
