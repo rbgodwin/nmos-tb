@@ -108,7 +108,7 @@ resource "aws_instance" "dns-server" {
 
     provisioner "file" {
         source = "${path.module}/conf/db.nmos-tb.org"
-        destination = "/home/ec2-user/db.nmos-tb.orgs"
+        destination = "/home/ec2-user/db.nmos-tb.org"
     }
 
     provisioner "file" {
