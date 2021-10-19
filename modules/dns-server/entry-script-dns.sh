@@ -15,7 +15,7 @@ sudo chmod 777 /var/cache/bind
 sudo cp /home/ec2-user/named.conf /etc/bind/named.conf
 sudo cp /home/ec2-user/named.conf.local /etc/bind/named.conf.local
 sudo cp /home/ec2-user/named.conf.options /etc/bind/named.conf.options
-sudo cp /home/ec2-user/named.conf.default-zones /etc/bind/zones/named.conf.default-zones
+sudo cp /home/ec2-user/named.conf.default-zones /etc/bind/named.conf.default-zones
 sudo cp /home/ec2-user/db.root /etc/bind/db.root
 sudo cp /home/ec2-user/db.local /etc/bind/db.local
 sudo cp /home/ec2-user/db.127 /etc/bind/db.127
@@ -28,7 +28,7 @@ sudo cp /home/ec2-user/db.10 /etc/bind/zones/db.10
 
 
 # Start up the BIND9 DNS
-sudo docker run -it \
+sudo docker run -d \
         --name=bind9 \
         --publish 53:53/udp \
         --publish 53:53/tcp \
