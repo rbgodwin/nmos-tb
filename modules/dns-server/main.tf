@@ -102,52 +102,8 @@ resource "aws_instance" "dns-server" {
     }
 
     provisioner "file" {
-        source = "${path.module}/conf/named.conf.local"
-        destination = "/home/ec2-user/named.conf.local"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/named.conf.options"
-        destination = "/home/ec2-user/named.conf.options"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/named.conf.default-zones"
-        destination = "/home/ec2-user/named.conf.default-zones"
-    }
-    provisioner "file" {
-        source = "${path.module}/conf/db.root"
-        destination = "/home/ec2-user/db.root"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/db.local"
-        destination = "/home/ec2-user/db.local"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/db.127"
-        destination = "/home/ec2-user/db.127"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/db.0"
-        destination = "/home/ec2-user/db.0"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/db.255"
-        destination = "/home/ec2-user/db.255"
-    }
-    
-    provisioner "file" {
         source = "${path.module}/conf/db.nmos-tb.org"
         destination = "/home/ec2-user/db.nmos-tb.org"
-    }
-
-    provisioner "file" {
-        source = "${path.module}/conf/db.10"
-        destination = "/home/ec2-user/db.10"
     }
 
     provisioner "remote-exec" {
