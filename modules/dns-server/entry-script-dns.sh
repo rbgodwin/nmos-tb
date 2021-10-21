@@ -1,10 +1,6 @@
 #!/bin/bash
 sudo yum update -y 
-sudo yum install -y docker
-sudo systemctl start docker
-sudo usermod -aG docker ec2-user
 sudo yum install -y bind bind-utils
-
 
 #Copy over the configuration files for Bind 9
 sudo cp /home/ec2-user/named.conf /etc

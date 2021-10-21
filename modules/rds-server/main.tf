@@ -79,10 +79,10 @@ resource "aws_instance" "rds-server" {
     }
 
     provisioner "file" {
-        source = "entry-script-rds.sh"
+        source = "${path.module}/entry-script-rds.sh"
         destination = "/home/ec2-user/entry-script-rds.sh"
     }
-
+ 
     provisioner "remote-exec" {
         inline = [
             "chmod +x /home/ec2-user/entry-script-rds.sh",
