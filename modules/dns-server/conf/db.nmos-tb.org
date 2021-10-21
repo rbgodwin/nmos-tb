@@ -9,7 +9,7 @@ $TTL	604800
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	ns.test.com.
+@	IN	NS	ns.nmos-tb.org.
 ns	IN	A	10.0.50.59
 rbg	IN	A	10.0.50.77
 
