@@ -83,6 +83,17 @@ resource "aws_instance" "rds-server" {
         destination = "/home/ec2-user/entry-script-rds.sh"
     }
  
+    provisioner "file" {
+        source = "${path.module}/conf/node.json"
+        destination = "/tmp/node.json"
+    }
+
+    provisioner "file" {
+        source = "${path.module}/conf/registry.json"
+        destination = "/tmp/registry.json"
+    }
+
+
     provisioner "remote-exec" {
         inline = [
             "chmod +x /home/ec2-user/entry-script-rds.sh",
