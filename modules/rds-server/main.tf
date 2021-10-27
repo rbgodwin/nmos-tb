@@ -19,7 +19,7 @@ resource "aws_security_group" "rds-server-sg" {
 # NMOS RDS
      ingress {
         from_port = 8010
-        to_port = 8010
+        to_port = 8011
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }

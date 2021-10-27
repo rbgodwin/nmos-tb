@@ -1,0 +1,7 @@
+{
+    "domain": "nmos-tb.org.",
+    "query_port": 8010,
+    "query_ws_port": 8010,
+    "registration_port": 8010,
+    "system_port": 25000
+}

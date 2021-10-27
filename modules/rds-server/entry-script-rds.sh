@@ -5,5 +5,5 @@ sudo systemctl start docker
 sudo usermod -aG docker ec2-user
 
 docker pull rhastie/nmos-cpp:latest
-sudo docker run -d --net=host --privileged --rm rhastie/nmos-cpp:latest 
-sudo docker run --env RUN_NODE=TRUE -d --net=host --privileged --rm rhastie/nmos-cpp:latest
+sudo docker run -it -v /tmp:/tmp --net=host --privileged --rm rhastie/nmos-cpp:latest  /home/nmos-cpp-registry /tmp/registry.json
+sudo docker run -d -v /tmp:/tmp --net=host --privileged --rm rhastie/nmos-cpp:latest /home/nmos-cpp-node /tmp/node.json
