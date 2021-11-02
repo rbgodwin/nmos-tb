@@ -24,10 +24,18 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-#Node 
+# RDS Server Node 
      ingress {
         from_port = 3212
         to_port = 3212
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+#NMOS Node 
+     ingress {
+        from_port = 8011
+        to_port = 8011
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
