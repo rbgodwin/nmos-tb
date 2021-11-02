@@ -56,7 +56,7 @@ qry-api-1._nmos-query._tcp		TXT	"api_ver=v1.0,v1.1,v1.2,v1.3" "api_proto=http" "
 sys-api-1._nmos-system._tcp		SRV	0 0 8010 registry.nmos-tb.org.
 sys-api-1._nmos-system._tcp		TXT	"api_ver=v1.0" "api_proto=http" "api_auth=false" "pri=0"
 
-; The SRV and TXT for the Authisation API (AMWA NMOS IS-10)
+; The SRV and TXT for the Authorisation API (AMWA NMOS IS-10)
 auth-api-1._nmos-auth._tcp		SRV	0 0 4999 registry.nmos-tb.org.
 auth-api-1._nmos-auth._tcp		TXT	"api_ver=v1.0" "api_proto=http" "pri=0"
 

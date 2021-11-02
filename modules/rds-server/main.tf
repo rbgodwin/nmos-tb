@@ -16,10 +16,35 @@ resource "aws_security_group" "rds-server-sg" {
 
     }
 
-# NMOS RDS
+# NMOS RDS Registration and Query
      ingress {
         from_port = 8010
-        to_port = 8011
+        to_port = 8010
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+#Node 
+     ingress {
+        from_port = 3212
+        to_port = 3212
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+# MQTT Service
+     ingress {
+        from_port = 1883
+        to_port = 1883
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+#System 
+
+     ingress {
+        from_port = 10641
+        to_port = 10641
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -93,6 +118,10 @@ resource "aws_instance" "rds-server" {
         destination = "/tmp/registry.json"
     }
 
+provisioner "file" {
+        source = "${path.module}/conf/container-config"
+        destination = "/tmp/container-config"
+    }
 
     provisioner "remote-exec" {
         inline = [
