@@ -27,7 +27,7 @@ _services._dns-sd._udp	PTR	_nmos-mqtt._tcp
 ; This example uses a domain of 'nmos-tb.org'. We recommend using a subdomain of a domain name which you own.
 ; This example has a resolvable DNS host/name (as a A records) which points to the relevant host operating the service
 dns.nmos-tb.org.	IN	A	10.0.50.59
-rds.nmos-tb.org.	IN	A	10.0.50.77
+registry.nmos-tb.org.	IN	A	10.0.50.77
 
 ; There should be one PTR record for each instance of the service you wish to advertise.
 _nmos-register._tcp	PTR	reg-api-1._nmos-register._tcp

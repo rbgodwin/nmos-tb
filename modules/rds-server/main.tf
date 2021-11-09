@@ -16,7 +16,7 @@ resource "aws_security_group" "rds-server-sg" {
 
     }
 
-# NMOS RDS Registration and Query
+# NMOS RDS Registration and Query Port
      ingress {
         from_port = 8010
         to_port = 8010
@@ -24,18 +24,18 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-# RDS Server Node 
+# RDS Query Port
      ingress {
-        from_port = 3212
-        to_port = 3212
+        from_port = 8011
+        to_port = 8011
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
 
 #NMOS Node 
      ingress {
-        from_port = 8011
-        to_port = 8011
+        from_port = 8012
+        to_port = 8012
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -48,11 +48,11 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-#System 
+#Node WS Port
 
      ingress {
-        from_port = 10641
-        to_port = 10641
+        from_port = 11001
+        to_port = 11001
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
