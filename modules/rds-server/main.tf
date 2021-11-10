@@ -48,6 +48,14 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+# mDSN Port
+     ingress {
+        from_port = 5353
+        to_port = 5353
+        protocol = "udp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
 #Node WS Port
 
      ingress {
