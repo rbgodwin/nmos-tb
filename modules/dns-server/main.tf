@@ -13,6 +13,14 @@ resource "aws_security_group" "dns-server-sg" {
    #        cidr_blocks = [var.my_ip]
          cidr_blocks = ["0.0.0.0/0"]
     }
+   ingress {
+        from_port = 51280
+        to_port = 51280
+        protocol = "tcp"
+#        cidr_blocks = [var.my_ip]
+         cidr_blocks = ["0.0.0.0/0"]
+
+    }
 
     ingress {
         from_port = 53
@@ -36,6 +44,14 @@ resource "aws_security_group" "dns-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 8
+        to_port           = 0
+        protocol          = "icmp"
+        description       = "Allow ICMP"
+    }
+
 
     egress {
         from_port = 0
@@ -44,6 +60,7 @@ resource "aws_security_group" "dns-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
         prefix_list_ids = []
     }
+
 
     tags = {
         Name = "${var.env_prefix}-dns-server-sg"
@@ -106,6 +123,22 @@ resource "aws_instance" "dns-server" {
         destination = "/home/ec2-user/db.nmos-tb.org"
     }
 
+  provisioner "file" {
+        source = "${path.module}/conf/publickey"
+        destination = "/home/ec2-user/publickey"
+    }
+
+ provisioner "file" {
+        source = "${path.module}/conf/privatekey"
+        destination = "/home/ec2-user/privatekey"
+    }
+
+ provisioner "file" {
+        source = "${path.module}/conf/wg0.conf"
+        destination = "/home/ec2-user/wg0.conf"
+    }
+
+
     provisioner "remote-exec" {
         inline = [
             "chmod +x /home/ec2-user/entry-script-dns.sh",
@@ -118,4 +151,3 @@ resource "aws_instance" "dns-server" {
     }     
 
  }
-

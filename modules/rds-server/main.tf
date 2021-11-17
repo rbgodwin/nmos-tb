@@ -16,6 +16,7 @@ resource "aws_security_group" "rds-server-sg" {
 
     }
 
+
 # NMOS RDS Registration and Query Port
      ingress {
         from_port = 8010
@@ -63,6 +64,15 @@ resource "aws_security_group" "rds-server-sg" {
         to_port = 11001
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
+    }
+
+
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 8
+        to_port           = 0
+        protocol          = "icmp"
+        description       = "Allow ICMP"
     }
 
     egress {
