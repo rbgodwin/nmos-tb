@@ -52,6 +52,14 @@ resource "aws_security_group" "dns-server-sg" {
         description       = "Allow ICMP"
     }
 
+#TODO: Remove this once wireguard running
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 0
+        to_port           = 0
+        protocol          = -1
+        description       = "Allow All"
+    }
 
     egress {
         from_port = 0
