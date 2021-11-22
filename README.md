@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This repository contains an implementation of an NMOS Testbed. The code uses Terraform to create the following:   
+This repository contains an implementation of an NMOS Testbed. 
+
+The code uses Terraform to create the following:   
 
 # Instance 1 - AWS Linux running a 
 - DNS Service (BIND9) configured for a NMOS deployment.
@@ -10,7 +12,7 @@ This repository contains an implementation of an NMOS Testbed. The code uses Ter
 
 # Instance 2 - AWS Linux running 
 - [Easy-NMOS](https://github.com/rhastie/easy-nmos) Docker Containers for Sony nmos-cpp RDS and Nodes
-- 
+  
 For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
  
 ### Getting Started With NMOS
@@ -37,7 +39,7 @@ Ideas for the project:
 - Add AMWA NMOS API [Test Suite](https://github.com/AMWA-TV/nmos-testing)
 - Add reference media NMOS nodes that can generate actual video,audio, ancillary flows
 - Add in items to implement [BCP-00]3(https://specs.amwa.tv/bcp-003/)
-- 
+  
 ## Contributing
 
 We welcome bug reports, feature requests and contributions to the implementation and documentation.
