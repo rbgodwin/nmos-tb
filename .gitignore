@@ -1,9 +1,13 @@
 #local .terraform dir
 .terraform/*
 
+.terraform.lock.hcl 
+
 # tf state files
 *.tfstate
 *.tfstate.*
+
+admin_accessKeys.csv
 
 # Terraform variable files may include senstive data
 #*.tfvars

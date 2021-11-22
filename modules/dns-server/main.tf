@@ -10,7 +10,16 @@ resource "aws_security_group" "dns-server-sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = [var.my_ip]
+   #        cidr_blocks = [var.my_ip]
+         cidr_blocks = ["0.0.0.0/0"]
+    }
+   ingress {
+        from_port = 51280
+        to_port = 51280
+        protocol = "tcp"
+#        cidr_blocks = [var.my_ip]
+         cidr_blocks = ["0.0.0.0/0"]
+
     }
 
     ingress {
@@ -35,6 +44,22 @@ resource "aws_security_group" "dns-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 8
+        to_port           = 0
+        protocol          = "icmp"
+        description       = "Allow ICMP"
+    }
+
+#TODO: Remove this once wireguard running
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 0
+        to_port           = 0
+        protocol          = -1
+        description       = "Allow All"
+    }
 
     egress {
         from_port = 0
@@ -43,6 +68,7 @@ resource "aws_security_group" "dns-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
         prefix_list_ids = []
     }
+
 
     tags = {
         Name = "${var.env_prefix}-dns-server-sg"
@@ -91,19 +117,35 @@ resource "aws_instance" "dns-server" {
     }
 
     provisioner "file" {
-        source = "entry-script-dns.sh"
+        source = "${path.module}/entry-script-dns.sh"
         destination = "/home/ec2-user/entry-script-dns.sh"
     }
 
     provisioner "file" {
-        source = "db.nmos-tb.com"
-        destination = "/home/ec2-user/db.nmos-tb.com"
-    }
-
-   provisioner "file" {
-        source = "named.conf"
+        source = "${path.module}/conf/named.conf"
         destination = "/home/ec2-user/named.conf"
     }
+
+    provisioner "file" {
+        source = "${path.module}/conf/db.nmos-tb.org"
+        destination = "/home/ec2-user/db.nmos-tb.org"
+    }
+
+  provisioner "file" {
+        source = "${path.module}/conf/publickey"
+        destination = "/home/ec2-user/publickey"
+    }
+
+ provisioner "file" {
+        source = "${path.module}/conf/privatekey"
+        destination = "/home/ec2-user/privatekey"
+    }
+
+ provisioner "file" {
+        source = "${path.module}/conf/wg0.conf"
+        destination = "/home/ec2-user/wg0.conf"
+    }
+
 
     provisioner "remote-exec" {
         inline = [
@@ -117,4 +159,3 @@ resource "aws_instance" "dns-server" {
     }     
 
  }
-

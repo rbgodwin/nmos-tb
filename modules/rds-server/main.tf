@@ -11,15 +11,68 @@ resource "aws_security_group" "rds-server-sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = [var.my_ip]
+#        cidr_blocks = [var.my_ip]
+         cidr_blocks = ["0.0.0.0/0"]
+
     }
 
-# NMOS RDS
+
+# NMOS RDS Registration and Query Port
      ingress {
         from_port = 8010
         to_port = 8010
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
+    }
+
+# RDS Query Port
+     ingress {
+        from_port = 8011
+        to_port = 8011
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+#NMOS Node 
+     ingress {
+        from_port = 8012
+        to_port = 8012
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+# MQTT Service
+     ingress {
+        from_port = 1883
+        to_port = 1883
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+# mDSN Port
+     ingress {
+        from_port = 5353
+        to_port = 5353
+        protocol = "udp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+#Node WS Port
+
+     ingress {
+        from_port = 11001
+        to_port = 11001
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+
+    ingress {
+        cidr_blocks       = ["0.0.0.0/0"]
+        from_port         = 8
+        to_port           = 0
+        protocol          = "icmp"
+        description       = "Allow ICMP"
     }
 
     egress {
@@ -77,8 +130,23 @@ resource "aws_instance" "rds-server" {
     }
 
     provisioner "file" {
-        source = "entry-script-rds.sh"
+        source = "${path.module}/entry-script-rds.sh"
         destination = "/home/ec2-user/entry-script-rds.sh"
+    }
+ 
+    provisioner "file" {
+        source = "${path.module}/conf/node.json"
+        destination = "/tmp/node.json"
+    }
+
+    provisioner "file" {
+        source = "${path.module}/conf/registry.json"
+        destination = "/tmp/registry.json"
+    }
+
+provisioner "file" {
+        source = "${path.module}/conf/container-config"
+        destination = "/tmp/container-config"
     }
 
     provisioner "remote-exec" {
