@@ -26,7 +26,7 @@ It relies on nmos-cpp to provide an NMOS Registry and a virtual NMOS Node in a D
 
 ### Creating Your Own NMOS Devices
 
-This implementation uses Sony's [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementation. Sony's implementation is used many venders to implement NMOS JT-NM Badged products. 
+This implementation uses Sony's [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementation. Sony's implementation is used by many venders to implement NMOS JT-NM Badged products. 
 
 ## Agile Development
 
