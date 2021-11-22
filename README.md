@@ -6,13 +6,17 @@ This repository contains an implementation of an NMOS Testbed.
 
 The code uses Terraform to create the following:   
 
-# Instance 1 - AWS Linux running a 
-- DNS Service (BIND9) configured for a NMOS deployment.
-- Wireguard VPN Server.
+- Instance 1 - AWS Linux running a 
+DNS Service (BIND9) configured for a NMOS deployment.
+Wireguard VPN Server.
 
-# Instance 2 - AWS Linux running 
-- [Easy-NMOS](https://github.com/rhastie/easy-nmos) Docker Containers for Sony nmos-cpp RDS and Nodes
+- Instance 2 - AWS Linux running 
+[Easy-NMOS](https://github.com/rhastie/easy-nmos) Docker Containers for Sony nmos-cpp RDS and Nodes
   
+- Security Groups for Access to
+SSH
+NMOS Reference Broadcast Server
+
 For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
  
 ### Getting Started With NMOS
