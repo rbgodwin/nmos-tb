@@ -7,5 +7,6 @@ variable instance_type {}
 variable public_key_location {}
 variable private_key_location {}
 variable image_name {}
+variable domain_name {}
 variable dns_address {}
 variable rds_address {}

@@ -1,0 +1,6 @@
+{
+    "domain": "nmos-tb.org.",
+    "http_port": 8010,
+    "query_ws_port": 8011,
+    "logging_level": -40
+}
