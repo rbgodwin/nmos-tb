@@ -19,12 +19,12 @@ NMOS Reference Broadcast Server
 
 For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
  
-### Getting Started With NMOS
+## Getting Started With NMOS
 
 The [Easy-NMOS](https://github.com/rhastie/easy-nmos) starter kit allows the user to launch a simple NMOS setup with minimal installation steps.
 It relies on nmos-cpp to provide an NMOS Registry and a virtual NMOS Node in a Docker Compose network, along with the AMWA NMOS Testing Tool and supporting services. Easy-NMOS is also a great first way to explore the relationship between NMOS services before building nmos-cpp for yourself.
 
-### Creating Your Own NMOS Devices
+## Creating Your Own NMOS Devices
 
 This implementation uses Sony's [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementation. Sony's implementation is used by many venders to implement NMOS JT-NM Badged products. 
 
@@ -34,7 +34,7 @@ This implementation uses Sony's [nmos-cpp](https://github.com/sony/nmos-cpp) ope
 
 The nmos-tb infrastructure, like the NMOS Specifications, is intended to be always ready, but steadily developing. One of the goals of the project is to provide the code used to create virtual workshops between the AMWA NMOS collaborators and to serve as a place to fork off new types of infrastructure while at the same time continuing to evolve.
 
-### Areas of Interest for Future Activity
+## Areas of Interest for Future Activity
 
 The implementation is designed to be extended. Development is ongoing, with the following areas of interest 
 
