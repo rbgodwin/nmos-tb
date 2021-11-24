@@ -17,6 +17,8 @@ Wireguard VPN Server.
 SSH and 
 NMOS Reference Broadcast Controller
 
+- Configuration Files that setup the DNS, Wireguard, RDS, and NMOS Nodes
+
 
 ## Acknowledgements
 
@@ -40,12 +42,11 @@ Ideas for the project:
 ## Contributing
 
 We welcome bug reports, feature requests and contributions to the implementation and documentation.
-Please have a look at the simple [Contribution Guidelines](CONTRIBUTING.md).
+Please have a look at the simple [Contribution Guidelines](CONTRIBUTING.md). 
+
+Note: The Contribution Guide follows the recommendations for contributing originally developed as part of the Sony nmos-cpp repo.
 
 ## AMWA and NMOS Reference
 
 For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
-
-
-Thank you for your interest!
 
