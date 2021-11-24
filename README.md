@@ -10,8 +10,7 @@ The code uses Terraform to create the following:
 DNS Service (BIND9) configured for a NMOS deployment along with a
 Wireguard VPN Server.
 
-- Instance 2 - AWS Linux running 
-[Easy-NMOS](https://github.com/rhastie/easy-nmos) Docker Containers for Sony nmos-cpp RDS and Nodes
+- Instance 2 - AWS Linux running Docker Containers for Sony nmos-cpp RDS and Nodes
   
 - Security Groups for Access to
 SSH and 
@@ -26,7 +25,7 @@ This work is based on opensource contributions from many AMWA NMOS participants.
  
 - The AMWA Network Media Open Specification [NMOS](https://www.amwa.tv/nmos-overview) family of APIs, Best Current Practices, and HOW-TO documents.  
 - The Sony [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementations for RDS and Nodes. 
-- The [Easy-NMOS](https://github.com/rhastie/easy-nmos) starter kit.
+- The [Easy-NMOS](https://github.com/rhastie/easy-nmos) starter kit for Docker RDS, Nodes, and Broadcast Controller Containers.
   
 
 ## Areas of Interest for Future Activity
