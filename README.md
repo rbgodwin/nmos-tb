@@ -10,7 +10,7 @@ The code uses Terraform to create the following:
 DNS Service (BIND9) configured for a NMOS deployment along with a
 Wireguard VPN Server.
 
-- Instance 2 - AWS Linux running Docker Containers for Sony nmos-cpp RDS and Nodes
+- Instance 2 - AWS Linux running NMOS RDS, Nodes and Broadcast Controller
   
 - Security Groups for Access to
 SSH and 
