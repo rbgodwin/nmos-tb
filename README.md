@@ -7,32 +7,25 @@ This repository contains an implementation of an NMOS Testbed.
 The code uses Terraform to create the following:   
 
 - Instance 1 - AWS Linux running a 
-DNS Service (BIND9) configured for a NMOS deployment.
+DNS Service (BIND9) configured for a NMOS deployment along with a
 Wireguard VPN Server.
 
 - Instance 2 - AWS Linux running 
 [Easy-NMOS](https://github.com/rhastie/easy-nmos) Docker Containers for Sony nmos-cpp RDS and Nodes
   
 - Security Groups for Access to
-SSH
-NMOS Reference Broadcast Server
+SSH and 
+NMOS Reference Broadcast Controller
 
-For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
+
+## Acknowledgements
+
+This work is based on opensource contributions from many AMWA NMOS participants. The author gratefully acknowledges contributors to the following repos
  
-## Getting Started With NMOS
-
-The [Easy-NMOS](https://github.com/rhastie/easy-nmos) starter kit allows the user to launch a simple NMOS setup with minimal installation steps.
-It relies on nmos-cpp to provide an NMOS Registry and a virtual NMOS Node in a Docker Compose network, along with the AMWA NMOS Testing Tool and supporting services. Easy-NMOS is also a great first way to explore the relationship between NMOS services before building nmos-cpp for yourself.
-
-## Creating Your Own NMOS Devices
-
-This implementation uses Sony's [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementation. Sony's implementation is used by many venders to implement NMOS JT-NM Badged products. 
-
-## Agile Development
-
-[<img alt="JT-NM Tested 03/20 NMOS & TR-1001-1" src="Documents/images/jt-nm-tested-03-20-registry.png?raw=true" height="135" align="right"/>](https://jt-nm.org/jt-nm_tested/)
-
-The nmos-tb infrastructure, like the NMOS Specifications, is intended to be always ready, but steadily developing. One of the goals of the project is to provide the code used to create virtual workshops between the AMWA NMOS collaborators and to serve as a place to fork off new types of infrastructure while at the same time continuing to evolve.
+- The AMWA Network Media Open Specification [NMOS](https://www.amwa.tv/nmos-overview) family of APIs, Best Current Practices, and HOW-TO documents.  
+- The Sony [nmos-cpp](https://github.com/sony/nmos-cpp) opensource NMOS implementations for RDS and Nodes. 
+- The [Easy-NMOS](https://github.com/rhastie/easy-nmos) starter kit.
+  
 
 ## Areas of Interest for Future Activity
 
@@ -48,6 +41,11 @@ Ideas for the project:
 
 We welcome bug reports, feature requests and contributions to the implementation and documentation.
 Please have a look at the simple [Contribution Guidelines](CONTRIBUTING.md).
+
+## AMWA and NMOS Reference
+
+For more information about AMWA, NMOS and the Networked Media Incubator, please refer to <http://amwa.tv/>.
+
 
 Thank you for your interest!
 
