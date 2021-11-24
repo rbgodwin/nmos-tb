@@ -44,7 +44,7 @@ Ideas for the project:
 We welcome bug reports, feature requests and contributions to the implementation and documentation.
 Please have a look at the simple [Contribution Guidelines](CONTRIBUTING.md). 
 
-Note: The Contribution Guide follows the recommendations for contributing originally developed as part of the Sony nmos-cpp repo.
+Note: The Contribution Guide follows the recommendations for contributing originally developed as part of the Sony [nmos-cpp](https://github.com/sony/nmos-cpp) repo.
 
 ## AMWA and NMOS Reference
 
