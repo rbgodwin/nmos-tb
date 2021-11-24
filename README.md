@@ -37,7 +37,7 @@ Ideas for the project:
 
 - Add AMWA NMOS API [Test Suite](https://github.com/AMWA-TV/nmos-testing)
 - Add reference media NMOS nodes that can generate actual video,audio, ancillary flows
-- Add in items to implement [BCP-003](https://specs.amwa.tv/bcp-003/)
+- Add in items to implement NMOS Security Best Current Practices [BCP-003](https://specs.amwa.tv/bcp-003/)
   
 ## Contributing
 
