@@ -146,6 +146,11 @@ resource "aws_instance" "rds-server" {
         destination = "/tmp/node.json"
     }
 
+     provisioner "file" {
+        source = "${path.module}/conf/UserConfig.py"
+        destination = "/tmp/UserConfig.py"
+    }
+
     provisioner "file" {
         source = "${path.module}/conf/registry.json"
         destination = "/tmp/registry.json"

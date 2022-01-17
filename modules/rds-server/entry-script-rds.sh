@@ -13,4 +13,4 @@ sudo docker run -d --restart unless-stopped -v /tmp/container-config:/home/conta
 
 #AMWA Auto-Tests
 sudo docker pull amwa/nmos-testing
-docker run -d -p="5000:5000" amwa/nmos-testing
+sudo docker run -d -p="5000:5000" -v="/tmp/UserConfig.py:/config/UserConfig.py" amwa/nmos-testing
