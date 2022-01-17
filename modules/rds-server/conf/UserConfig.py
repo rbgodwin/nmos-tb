@@ -18,12 +18,12 @@ from . import Config as CONFIG
 CONFIG.DNS_SD_MODE = "unicast"
 
 # Don't run a DNS Service - will use the one provided on the testbed
-ENABLE_DNS_SD = False
+CONFIG.ENABLE_DNS_SD = False
 
 #The location of the RDS Query API
-QUERY_API_HOST = "10.0.50.77"
-QUERY_API_PORT = 8010
+CONFIG.QUERY_API_HOST = "10.0.50.77"
+CONFIG.QUERY_API_PORT = 8010
 
 #Our NMOS Test Bed DNS Domain
-DNS_DOMAIN = "nmos-tb"
+CONFIG.DNS_DOMAIN = "nmos-tb"
 
