@@ -66,6 +66,13 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+# AMWA Test Port
+     ingress {
+        from_port = 5000
+        to_port = 5000
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 
     ingress {
         cidr_blocks       = ["0.0.0.0/0"]
@@ -137,6 +144,11 @@ resource "aws_instance" "rds-server" {
     provisioner "file" {
         source = "${path.module}/conf/node.json"
         destination = "/tmp/node.json"
+    }
+
+     provisioner "file" {
+        source = "${path.module}/conf/UserConfig.py"
+        destination = "/tmp/UserConfig.py"
     }
 
     provisioner "file" {
