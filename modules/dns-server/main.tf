@@ -116,6 +116,9 @@ resource "aws_instance" "dns-server" {
         private_key = file(var.private_key_location)
     }
 
+    #This instance does NAT so turn off the AWS check of source and destination
+    source_dest_check = false
+
     provisioner "file" {
         source = "${path.module}/entry-script-dns.sh"
         destination = "/home/ec2-user/entry-script-dns.sh"
