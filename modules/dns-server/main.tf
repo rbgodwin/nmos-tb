@@ -162,3 +162,9 @@ resource "aws_instance" "dns-server" {
     }     
 
  }
+
+ #Associate the Elastic IP with the DNS Server instance
+    resource "aws_eip_association" "eip_assoc" {
+        instance_id   = aws_instance.dns-server.id
+        allocation_id = var.eip_id
+    }

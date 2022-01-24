@@ -1,6 +1,7 @@
 avail_zone = "eu-west-1b"
 env_prefix = "dev"
 my_ip =  "69.245.142.59/32"
+eip_id  = "eipalloc-0983ceda17cb28ecb"
 #private_key_location = "C:/Users/Randy/.ssh/id_rsa"
 #public_key_location = "C:/Users/Randy/.ssh/id_rsa.pub"
 #private_key_location = "/home/rbgodwin/.ssh/id_rsa"
