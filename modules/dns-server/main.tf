@@ -116,7 +116,7 @@ resource "aws_instance" "dns-server" {
         private_key = file(var.private_key_location)
     }
 
-    #This instance does NAT so turn off the AWS check of source and destination
+    #This instance does forwarding so turn off the AWS check of source and destination
     source_dest_check = false
 
     provisioner "file" {
