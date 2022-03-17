@@ -15,7 +15,7 @@ sudo docker run -d --restart unless-stopped -v /tmp/container-config:/home/conta
 
 #AMWA Auto-Tests
 sudo docker pull amwa/nmos-testing
-sudo docker run -d --restart unless-stopped -p 5000:5000 -p 5001:5001 --v="/tmp/UserConfig.py:/config/UserConfig.py" --name NMOS-TESTING amwa/nmos-testing
+sudo docker run -d --restart unless-stopped -p 5000:5000 -p 5001:5001 -v="/tmp/UserConfig.py:/config/UserConfig.py" --name NMOS-TESTING amwa/nmos-testing
 
 # Go through our off-cloud gateways (10.0.59.0/24 via wireguard server) 
 sudo ip route add 10.0.59.0/24 via 10.0.50.59
