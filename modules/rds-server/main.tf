@@ -73,6 +73,21 @@ resource "aws_security_group" "rds-server-sg" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
+    
+# AMWA Controller Test Facade Port
+     ingress {
+        from_port = 5001
+        to_port = 5001
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+# AMWA Controller Test RDS 
+     ingress {
+        from_port = 5002
+        to_port = 5002
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
 
     ingress {
         cidr_blocks       = ["0.0.0.0/0"]
@@ -135,6 +150,9 @@ resource "aws_instance" "rds-server" {
         user = "ec2-user"
         private_key = file(var.private_key_location)
     }
+
+    #This instance does forwarding so turn off the AWS check of source and destination
+    source_dest_check = false
 
     provisioner "file" {
         source = "${path.module}/entry-script-rds.sh"

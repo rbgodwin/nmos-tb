@@ -36,6 +36,7 @@ module "dns-server" {
     source = "./modules/dns-server"
     vpc_id = aws_vpc.nmos-tb-vpc.id
     my_ip = var.my_ip
+    eip_id = var.eip_id
     env_prefix = var.env_prefix
     image_name = var.image_name
     public_key_location = var.public_key_location

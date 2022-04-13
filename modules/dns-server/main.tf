@@ -116,6 +116,9 @@ resource "aws_instance" "dns-server" {
         private_key = file(var.private_key_location)
     }
 
+    #This instance does forwarding so turn off the AWS check of source and destination
+    source_dest_check = false
+
     provisioner "file" {
         source = "${path.module}/entry-script-dns.sh"
         destination = "/home/ec2-user/entry-script-dns.sh"
@@ -159,3 +162,9 @@ resource "aws_instance" "dns-server" {
     }     
 
  }
+
+ #Associate the Elastic IP with the DNS Server instance
+    resource "aws_eip_association" "eip_assoc" {
+        instance_id   = aws_instance.dns-server.id
+        allocation_id = var.eip_id
+    }

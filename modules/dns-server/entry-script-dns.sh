@@ -25,3 +25,6 @@ sudo cp /home/ec2-user/wg0.conf /etc/wireguard
 #start it up
 sudo wg-quick up wg0
 
+# Setup a route to get to the 172.17.0.0/24 network attached to the RDS 
+sudo ip route add 172.17.0.0/16 via 10.0.50.77
+
