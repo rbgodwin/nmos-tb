@@ -41,6 +41,14 @@ resource "aws_security_group" "rds-server-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
+#NMOS Mock Device Control Node 
+     ingress {
+        from_port = 8080
+        to_port = 8080
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
 # MQTT Service
      ingress {
         from_port = 1883
