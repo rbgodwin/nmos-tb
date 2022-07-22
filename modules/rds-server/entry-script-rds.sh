@@ -32,7 +32,7 @@ git checkout nmos-tb-implementation
 npm install
 mkdir dist
 mkdir dist/server
-cp config/config.json dist/server
+cp config/config.json dist/serve
 npm run serve &
 
 # Go through our off-cloud gateways (10.0.59.0/24 via wireguard server) 
